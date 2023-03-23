@@ -1,28 +1,25 @@
 import React from "react";
-import {CurrencyValue} from "./Service";
-import './index.css'
+import {CurrencyValue} from "../index";
+import './Header.css'
 export const Header = () => {
 
-    const [state, setState] = React.useState('11111');
+    const [state, setState] = React.useState(0);
     const data = React.useContext(CurrencyValue);
-
 
     React.useEffect(()=>{
         const arr = [];
         for (const i in data) {
-            const curr = Object.keys(data[i]).shift();
-            const value = Object.values(data[i]).shift();
-            const res = `${curr}/UAH: ${value}`;
+            const res = `${data[i].cc}/UAH: ${data[i].rate}; `;
             arr.push(res)
         }
-        setState([arr[0], '; ', arr[1]])
+        setState(arr);
     }, [data])
 
     return (
         <div>
             <header>
                 <h1>Курс валют</h1>
-                <div className={'blue'}> {state}</div>
+                <div className={'content'}> {state}</div>
             </header>
         </div>
     )

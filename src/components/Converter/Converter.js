@@ -1,6 +1,6 @@
 import React from "react";
-import './index.css'
-import {CurrencyValue} from "./Service";
+import './Converter.css'
+import {CurrencyValue} from "../index";
 
 export const Converter = ()=>{
 
@@ -12,35 +12,35 @@ export const Converter = ()=>{
 
     const data = React.useContext(CurrencyValue);
 
-    const convertValue = (valueFromInput, firstCurr, secondCurr, number)=>{
+    const someCurr = symbol => data[symbol].cc;
+    const someRate = symbol => data[symbol].rate;
+    const whichFunc = (someNum, someRes) => someNum === 1 ? setNumber2(someRes) : setNumber1(someRes);
 
+
+    const convertValue = (valueFromInput, firstCurr, secondCurr, number)=>{
 
         number === 1 ? setNumber1(valueFromInput) : setNumber2(valueFromInput)
         for (const i in data) {
             if (firstCurr === 'UAH') {
                 if (secondCurr === 'UAH') {
-                    number === 1 ? setNumber2(valueFromInput) : setNumber1(valueFromInput)
+                    whichFunc(number, valueFromInput);
                 }
                 for (const k in data) {
-                    if (Object.keys(data[k]).toString() === secondCurr) {
-                        const secondNum = Object.values(data[k]).shift();
-                        const result = valueFromInput / secondNum;
-                        number === 1 ? setNumber2(result) : setNumber1(result)
+                    if (someCurr(k) === secondCurr) {
+                        const result = valueFromInput / someRate(k);
+                        whichFunc(number, result);
                     }
                 }
             }
-            if (Object.keys(data[i]).toString() === firstCurr) {
-                const firstNum = Object.values(data[i]).shift()
+            if (someCurr(i) === firstCurr) {
                 if (secondCurr === 'UAH') {
-                    const res = firstNum * valueFromInput;
-                    number === 1 ? setNumber2(res) : setNumber1(res);
-
+                    const res = someRate(i) * valueFromInput;
+                    whichFunc(number, res);
                 }
                 for (const j in data) {
-                    if (Object.keys(data[j]).toString() === secondCurr) {
-                        const secondNum = Object.values(data[j]).shift();
-                        const result = firstNum / secondNum * valueFromInput;
-                        number === 1 ? setNumber2(result) : setNumber1(result)
+                    if (someCurr(j) === secondCurr) {
+                        const result = someRate(i) / someRate(j) * valueFromInput;
+                        whichFunc(number, result);
                     }
                 }
             }

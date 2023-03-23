@@ -1,0 +1,30 @@
+
+.bigBox{
+    display: flex;
+    justify-content: space-between;
+    border: 2px solid black;
+    height: 150px;
+}
+
+.border {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+input{
+    width: 70%;
+    font-size: 60px;
+    border: 1px solid gray;
+}
+
+.curr{
+    border: 1px solid blue;
+    height: 30px;
+    width: 30%;
+    margin-right: 10px;
+    justify-content: center;
+    text-align: center;
+}

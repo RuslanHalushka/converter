@@ -1,0 +1,12 @@
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: silver;
+    height: 100px;
+}
+
+.content{
+    margin-top: -10px;
+    height: 20px;
+}

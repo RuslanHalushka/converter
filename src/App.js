@@ -1,10 +1,10 @@
 import React from "react";
-import {Service} from "./Service";
+import {Currencies} from "./components/index";
 function App(){
 
     return(
         <div>
-            <Service/>
+            <Currencies/>
         </div>
     )
 
